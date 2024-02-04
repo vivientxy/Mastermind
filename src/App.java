@@ -1,4 +1,5 @@
 import java.io.Console;
+import java.util.Arrays;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -12,6 +13,7 @@ public class App {
         
         String choice = console.readLine("Selection: ");
 
+        System.out.println(Arrays.asList(Difficulty.values()).stream().filter(difficulty -> difficulty.equals(choice.toUpperCase())));
         
     }
 }
