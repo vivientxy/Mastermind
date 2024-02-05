@@ -21,15 +21,19 @@ public class App {
             input = scanner.next();
         }
         Difficulty difficultyLevel = Difficulty.valueOf(input.toUpperCase());
-        System.out.println(difficultyLevel + " mode chosen");
-        ;
         System.out.println();
+
+        System.out.println("--------------------------------------------------------------------------------");
+        System.out.println(difficultyLevel + " MODE");
+        System.out.println("--------------------------------------------------------------------------------");
 
         // instantiate the board with difficulty level chosen (#rows and #colors)
         Board board = new Board(difficultyLevel);
         System.out.print("Possible colors: ");
         board.printPossibleColors();
         System.out.println("Number of rounds: " + board.getNumOfRows());
+        System.out.println("GREEN = correct color in correct position || RED = correct color in wrong position || BLACK = wrong color");
+        System.out.println("--------------------------------------------------------------------------------");
 
         // game start (while loop)
         boolean gameOn = true;
@@ -58,9 +62,13 @@ public class App {
                 gameOn = false;
             } else {
                 round ++;
+                if (round > board.getNumOfRows()) {
+                    System.out.println("\nSorry, you've lost!");
+                }
             }
 
             // repeat loop (count number of rounds)
+
         }
 
         scanner.close();
