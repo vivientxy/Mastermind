@@ -1,19 +1,42 @@
-import java.io.Console;
-import java.util.Arrays;
+import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) throws Exception {
 
-        Console console = System.console();
+        Scanner scanner = new Scanner(System.in);
 
-        System.out.println(
-            "Welcome to a game of Mastermind!\n\n" +
-            "Please choose your difficulty level:");
+        System.out.println("Welcome to a game of Mastermind!\n");
         Difficulty.printDifficultyList();
-        
-        String choice = console.readLine("Selection: ");
+        System.out.println();
+        System.out.println("Please choose your difficulty level:");
 
-        System.out.println(Arrays.asList(Difficulty.values()).stream().filter(difficulty -> difficulty.equals(choice.toUpperCase())));
-        
+        // get user input on difficulty level
+        String input = "";
+        while (!isDifficulty(input)) {
+            System.out.print("> ");
+            input = scanner.next();
+        }
+        System.out.println(input.toUpperCase() + " mode chosen");
+        Difficulty difficultyLevel = Difficulty.valueOf(input);
+
+
+
+
+
+        scanner.close();
+    }
+
+    public static boolean isDifficulty(String input) {
+        boolean result = false;
+        Difficulty difficulty = null;
+        try {
+            difficulty = Difficulty.valueOf(input.toUpperCase());
+        } catch (Exception e) {
+            result = false;
+        }
+        if (difficulty != null) {
+            result = true;
+        }
+        return result;
     }
 }
