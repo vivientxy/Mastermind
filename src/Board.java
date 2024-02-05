@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -9,6 +10,7 @@ public class Board {
     private List<Colors> possibleColors;
     private final Colors[] dealerRow;
     private Colors[][] playerRows;
+    // private Colors[] feedbackRow;
 
     public Board(Difficulty difficulty) {
         this.difficulty = difficulty;
@@ -28,13 +30,9 @@ public class Board {
             default:
                 break;
         }
+        this.possibleColors = generatePossibleColors(numOfColors);
         this.dealerRow = generateDealerRow(numOfColors);
         this.playerRows = new Colors[numOfRows][4];
-
-        List<Colors> colorList = Arrays.asList(Colors.class.getEnumConstants());
-        for (int i = 0; i < numOfColors; i++) {
-            this.possibleColors.add(colorList.get(i));
-        }
     }
 
     public Difficulty getDifficulty() {
@@ -49,6 +47,10 @@ public class Board {
         return numOfColors;
     }
 
+    public List<Colors> getPossibleColors() {
+        return possibleColors;
+    }
+
     public Colors[] getDealerRow() {
         return dealerRow;
     }
@@ -61,21 +63,40 @@ public class Board {
         this.playerRows = playerRows;
     }
 
+    // public Colors[] getFeedbackRow() {
+    //     return feedbackRow;
+    // }
+
+    // public void setFeedbackRow(Colors[] feedbackRow) {
+    //     this.feedbackRow = feedbackRow;
+    // }
 
     private Colors[] generateDealerRow(int numOfColors) {
-        // create an array that will hold 4 colors
         Colors[] result = new Colors[4];
-
-        // generate a number between 1 and 4 / 6 / 8 (based on game difficulty)
+        List<Colors> possibleColors = generatePossibleColors(numOfColors);
         Random rand = new Random();
-
-        // select a random colour from list of possibleColors and place into each of the
-        // 4 slots in result array
         for (int i = 0; i < result.length; i++) {
-            int randomNumber = rand.nextInt(numOfColors) + 1;
+            int randomNumber = rand.nextInt(numOfColors);
             result[i] = possibleColors.get(randomNumber);
         }
         return result;
+    }
+
+    private List<Colors> generatePossibleColors(int numOfColors) {
+        List<Colors> result = new ArrayList<>();
+        List<Colors> colorList = Arrays.asList(Colors.class.getEnumConstants());
+        for (int i = 0; i < numOfColors; i++) {
+            result.add(colorList.get(i));
+        }
+        return result;
+    }
+
+    public void printPossibleColors() {
+        String result = "";
+        for (Colors color : this.possibleColors) {
+            result += color + " ";
+        }
+        System.out.println(result);
     }
 
 }

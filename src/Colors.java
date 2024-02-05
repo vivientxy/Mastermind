@@ -1,3 +1,4 @@
 public enum Colors {
-    RED, BLUE, YELLOW, GREEN, BLACK, WHITE, GREY, BROWN;
+    A, B, C, D, E, F, G, H;
+    // RED, BLUE, YELLOW, GREEN, BLACK, WHITE, GREY, BROWN;
 }
