@@ -16,8 +16,24 @@ public class App {
             System.out.print("> ");
             input = scanner.next();
         }
-        System.out.println(input.toUpperCase() + " mode chosen");
-        Difficulty difficultyLevel = Difficulty.valueOf(input);
+        Difficulty difficultyLevel = Difficulty.valueOf(input.toUpperCase());
+        System.out.println(difficultyLevel + " mode chosen");;
+
+        // instantiate the board with difficulty level chosen (#rows and #colors)
+        Board board = new Board(difficultyLevel);
+
+        // game start (while loop)
+        boolean gameOn = true;
+        while (gameOn) {
+            // prompt for user answer input
+            String userGuess = "";
+            
+
+            // check input validity
+            // generate feedbackRow
+            // check for win (4 greens in feedback)
+            // repeat loop
+        }
 
 
 
@@ -26,6 +42,7 @@ public class App {
         scanner.close();
     }
 
+    // check if string is Difficulty enum
     public static boolean isDifficulty(String input) {
         boolean result = false;
         Difficulty difficulty = null;
@@ -39,4 +56,7 @@ public class App {
         }
         return result;
     }
+
+    // generate feedbackRow
+
 }
